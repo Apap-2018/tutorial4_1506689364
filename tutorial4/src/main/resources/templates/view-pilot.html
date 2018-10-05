@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>View Detail Pilot</title>
+	</head>
+	<body>
+		<h3 th:text="'License Number : ' + ${pilot.licenseNumber}"></h3>
+		<h3 th:text="'Name : ' + ${pilot.name}"></h3>
+		<h3 th:text="'Fly Hour : ' + ${pilot.flyHour}"></h3>
+		
+		<br>
+		
+		<form th:action="@{/pilot/delete/} + ${pilot.licenseNumber}" method="POST">
+			<button type="submit">Delete Pilot</button>
+		</form>
+		<br>
+		<button><a th:href="@{/pilot/update/} + ${pilot.licenseNumber}">Update Pilot</a></button>
+		<br>
+		<br>
+		
+		<h3>List of Flight :</h3>
+		<hr>
+		<div th:each="flight : ${flightList}">
+			<h3 th:text="'Flight Number : ' + ${flight.flightNumber}"></h3>
+			<h3 th:text="'Origin :' + ${flight.origin}"></h3>
+			<h3 th:text="'Destination : ' + ${flight.destination}"></h3>
+			<h3 th:text="'Time : ' + ${flight.time}"></h3>
+			<br>	
+			<form th:action="@{/flight/delete/} + ${flight.id}" method="POST">
+				<button type="submit">Delete Flight</button>
+			</form>
+			
+			<button><a th:href="@{/flight/update/} + ${flight.id}">Update Flight</a></button>
+			
+			<br>
+			<br>
+		</div>
+		
+		<br>
+		<td><a th:href="@{/flight/add/} + ${pilot.licenseNumber}">Add Flight</a></td>
+	</body>
+</html>
